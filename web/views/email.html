@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+
+<body class="theme-light" data-highlight="highlight-red" data-gradient="body-default">
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+        <div class="page-content pb-0">
+            <div data-card-height="cover" class="card">
+                <div class="card-top notch-clear">
+                    <div class="d-flex">
+                        <a href="#" data-back-button class="me-auto icon icon-m"><i class="font-14 fa fa-arrow-left color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-light multumesc-auto icon icon-m"><i class="font-12 fa fa-moon color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-dark multumesc-auto icon icon-m"><i class="font-12 fa fa-lightbulb color-yellow-dark"></i></a>
+                    </div>
+                </div>
+                <div class="card-center main-card-box">
+                    <div class="p-4 main-card">
+                        {{if .isCreate}}
+                        <h1 class="text-center font-800 font-40 mb-1">Create Account</h1>
+                        <p class="color-highlight text-center font-12">
+                            Please enter your email address
+                        </p>
+                        <div class="input-style no-borders has-icon validate-field">
+                            <i class="fa fa-lock"></i>
+                            <input type="email" class="form-control validate-email" id="form2a" placeholder="Email">
+                            <label for="form2a" class="color-highlight">Email</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        {{else}}
+                        <h1 class="text-center font-800 font-40 mb-1">Forgot Credentials</h1>
+                        <p class="color-highlight text-center font-12">
+                            Please enter your email address
+                        </p>
+                        <div class="input-style no-borders has-icon validate-field">
+                            <i class="fa fa-lock"></i>
+                            <input type="email" class="form-control validate-email" id="form2a" placeholder="Email">
+                            <label for="form2a" class="color-highlight">Email</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        {{end}}
+                        <a onclick="SendEmail()" class="back-button btn btn-full btn-m shadow-large rounded-sm text-uppercase font-900 bg-highlight">Send Email</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // 키 이밴트
+        const input = document.getElementById("form2a");
+
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                SendEmail();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        function SendEmail() {
+            const action = "{{.action}}";
+            const emailEle = document.getElementById("form2a");
+            let email = emailEle.value;
+
+            // 이메일 유효성 검사
+            let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+            if (!regex.test(email)) {
+                showErrorToast('이메일 형식이 올바르지 않습니다');
+                return
+            }
+
+            if (action === "signup") {
+                fetch('/v1/user/pending', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        state: "{{.state}}",
+                    }),
+                }).then(async resp => {
+                    let data = await resp.json();
+                    if (resp.status === 200) {
+                        alert("메일 전송이 완료되었습니다. 잠시후 메인 페이지로 이동합니다");
+                        window.location.href = "{{.homepage}}";
+                    } else {
+                        showErrorToast(data.message);
+                    }
+                })
+            } else if (action === "forgot") {
+                fetch('/v1/user/forgot/password', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        state: "{{.state}}",
+                    }),
+                }).then(async resp => {
+                    let data = await resp.json();
+                    if (resp.status === 200) {
+                        alert("메일 전송이 완료되었습니다. 잠시후 메인 페이지로 이동합니다");
+                        window.location.href = "{{.homepage}}";
+                    } else {
+                        showErrorToast(data.message);
+                    }
+                })
+            } else {
+                showErrorToast('요청 상태가 올바르지 않습니다');
+            }
+        }
+    </script>
+    {{template "script" .}}
+</body>
+</html>

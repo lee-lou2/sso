@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option go_package = "sso/proto";
+
+package sso;
+
+service ServicesSSO {
+  rpc GetUserInformation (GetUserInformationRequest) returns (GetUserInformationResponse) {}
+  rpc GenerateToken (GenerateTokenRequest) returns (GenerateTokenResponse) {}
+  rpc VerifyToken (VerifyTokenRequest) returns (VerifyTokenResponse) {}
+  rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse) {}
+}
+
+message GetUserInformationRequest {
+  string token = 1;
+  string session_id = 2;
+}
+
+message UserInformation {
+  string email = 1;
+}
+
+message GetUserInformationResponse {
+  UserInformation user = 1;
+}
+
+message GenerateTokenRequest {
+  string client_id = 1;
+  string session_id = 2;
+  string server_user = 3;
+  string client_user = 4;
+  string group = 5;
+}
+
+message Token {
+  string token = 1;
+  int64 expired_at = 2;
+}
+
+message GenerateTokenResponse {
+  Token access_token = 1;
+  Token refresh_token = 2;
+}
+
+message VerifyTokenRequest {
+  string token = 1;
+  string session_id = 2;
+}
+
+message VerifyTokenResponse {
+  string user = 1;
+  string group = 2;
+}
+
+message RefreshTokenRequest {
+  string token = 1;
+  string session_id = 2;
+}
+
+message RefreshTokenResponse {
+  Token access_token = 1;
+  Token refresh_token = 2;
+}

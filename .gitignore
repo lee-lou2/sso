@@ -1,0 +1,12 @@
+# 기본
+.idea
+
+# 인증 파일
+api/gin/certs
+
+# 환경 변수
+.env
+
+# 데이터 베이스
+db.sqlite3
+test.db.sqlite3

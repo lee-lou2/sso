@@ -1,0 +1,89 @@
+@media screen and (min-width:1200px) {
+/* PC */
+    .layout-body {
+        display: flex;
+        align-items: stretch;
+    }
+    .layout-body-items-background-left {
+        flex-basis: 40%;
+    }
+    .layout-body-items-background-right {
+        flex-basis: 40%;
+    }
+    .layout-body-items-main {
+        flex-basis: 20%;
+        min-width: 400px;
+        max-width: 400px;
+        margin-top: 50px;
+    }
+    .layout-body-items-main-content {
+        padding-bottom: 0px !important;
+        border-style: solid;
+        border-color: darkgray;
+        /*border-radius: 30px;*/
+        box-shadow: 10px 10px;
+    }
+    .layout-body-items-main-card {
+        height: 600px !important;
+    }
+}
+
+@media screen and (max-width:1200px) and (min-width: 600px) {
+/* MO */
+    .layout-body {
+        display: flex;
+        align-items: stretch;
+    }
+    .layout-body-items-background-left {
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+    .layout-body-items-background-right {
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+    .layout-body-items-main {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 100%;
+        max-width: 400px;
+        min-width: 300px;
+        margin-top: 50px;
+    }
+    .layout-body-items-main-content {
+        padding-bottom: 0px !important;
+        border-style: solid;
+        border-color: darkgray;
+        /*border-radius: 30px;*/
+        box-shadow: 10px 10px;
+    }
+    .layout-body-items-main-card {
+        height: 600px !important;
+    }
+}
+
+@media screen and (max-width:600px) {
+    /* Mini-MO */
+    .layout-body {
+        display: flex;
+        align-items: stretch;
+    }
+    .layout-body-items-background-left {
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+    .layout-body-items-background-right {
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+    .layout-body-items-main {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 100%;
+        max-width: 400px;
+        min-width: 300px;
+    }
+    .layout-body-items-main-content {
+        padding-bottom: 0px !important;
+    }
+}

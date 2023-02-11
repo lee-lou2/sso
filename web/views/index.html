@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+
+<body class="theme-light" data-highlight="highlight-red" data-gradient="body-default">
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+        <div class="page-content pb-0">
+            <div data-card-height="cover" class="card">
+                <div class="card-top notch-clear">
+                    <div class="d-flex">
+                        <a href="#" data-back-button class="me-auto icon icon-m"><i class="font-14 fa fa-arrow-left color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-light ms-auto icon icon-m"><i class="font-12 fa fa-moon color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-dark ms-auto icon icon-m"><i class="font-12 fa fa-lightbulb color-yellow-dark"></i></a>
+                    </div>
+                </div>
+                <div class="card-center main-card-box">
+                    <div class="ps-5 pe-5 main-card">
+
+                        <h1 class="text-center font-800 font-40 mb-1">Sign In</h1>
+                        <p class="color-highlight text-center font-12">Let's get you logged in</p>
+
+                        <div class="input-style no-borders has-icon validate-field">
+                            <i class="fa fa-at"></i>
+                            <input type="email" class="form-control validate-email" id="form1a" placeholder="Email">
+                            <label for="form1a" class="color-blue-dark font-10 mt-1">Email</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+
+                        <div class="input-style no-borders has-icon validate-field mt-4">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" class="form-control validate-password" id="form3a" placeholder="Password">
+                            <label for="form3a" class="color-blue-dark font-10 mt-1">Password</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+
+                        <div class="d-flex mt-4 mb-4">
+                            <div class="w-50 font-11 pb-2 text-start"><a href="/email?action=signup&state={{.state}}">Create Account</a></div>
+                            <div class="w-50 font-11 pb-2 text-end"><a href="/email?action=forgot">Forgot Credentials</a></div>
+                        </div>
+
+                        <a onclick="login()" class="back-button btn btn-full btn-m shadow-large rounded-sm text-uppercase font-700 bg-blue-light">LOGIN</a>
+                        <div class="divider mt-4"></div>
+                        <a onclick="location.href='/v1/auth/google/login/?state={{.state}}'" class="btn btn-icon btn-m btn-full shadow-l rounded-sm bg-google text-uppercase font-700 text-start"><i class="fab fa-google text-center bg-transparent"></i>Sign in with Google</a>
+    <!--                    <a href="#" class="btn btn-icon btn-m btn-full shadow-l rounded-sm bg-facebook text-uppercase font-700 text-start"><i class="fab fa-facebook-f text-center bg-transparent"></i>Sign in with Facebook</a>-->
+    <!--                    <a href="#" class="btn btn-icon btn-m btn-full shadow-l rounded-sm bg-twitter text-uppercase font-700 text-start mt-2 "><i class="fab fa-twitter text-center bg-transparent"></i>Sign in with Twitter</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Page Content-->
+
+    </div>
+
+    <script type="text/javascript">
+        // 키 이밴트
+        const input = document.getElementById("form3a");
+
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                login();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        function login() {
+            const emailEle = document.getElementById("form1a");
+            const passwordEle = document.getElementById("form3a");
+            fetch('/v1/auth/login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: emailEle.value,
+                    password: passwordEle.value,
+                    code: "{{.state}}"
+                }),
+            }).then(async resp => {
+                let data = await resp.json();
+                if (resp.status === 200) {
+                    window.location.href = data.callback_uri;
+                } else {
+                    showErrorToast(data.message);
+                }
+            })
+        }
+    </script>
+    {{template "script" .}}
+</body>
+</html>

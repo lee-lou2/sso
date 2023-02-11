@@ -1,0 +1,14 @@
+{{define "script"}}
+<div id="snackbar-error" class="snackbar-toast rounded-m bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i></div>
+<script type="text/javascript">
+  // 오류 메시지 표시
+  function showErrorToast(message) {
+    const snackId = document.getElementById("snackbar-error");
+    snackId.innerText = '❕ ' + message;
+    let snackToast = new bootstrap.Toast(snackId);
+    snackToast.show();
+  }
+</script>
+<script type="text/javascript" src="/static/assets/scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/assets/scripts/custom.js"></script>
+{{end}}

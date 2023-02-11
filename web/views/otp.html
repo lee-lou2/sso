@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+
+<body class="theme-light" data-highlight="highlight-red" data-gradient="body-default">
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+        <div class="page-content pb-0">
+            <div class="card" data-card-height="cover">
+                <div class="card-top notch-clear">
+                    <div class="d-flex">
+                        <a href="#" data-back-button class="me-auto icon icon-m"><i class="font-14 fa fa-arrow-left color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-light ms-auto icon icon-m"><i class="font-12 fa fa-moon color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-dark ms-auto icon icon-m"><i class="font-12 fa fa-lightbulb color-yellow-dark"></i></a>
+                    </div>
+                </div>
+                <div class="card-center main-card-box">
+                    <div class="main-card">
+                        <img src="images/undraw/2.svg" width="200" class="mx-auto">
+                        <h1 class="text-center pt-4">Enter One Time Passcode</h1>
+                        <p class="text-center font-12 mt-n2 mb-2">Let's verify your account before we proceed.</p>
+                        <div class="text-center mb-3 pt-3 pb-2">
+                            <form action="">
+                                <input class="otp mx-1 text-center font-24 font-900" type="tel" value="&#9679;">
+                                <input class="otp mx-1 text-center font-24 font-900" type="tel" value="&#9679;">
+                                <input class="otp mx-1 text-center font-24 font-900" type="tel" value="&#9679;">
+                                <input class="otp mx-1 text-center font-24 font-900" type="tel" value="&#9679;">
+                            </form>
+                        </div>
+                        <a href="#" data-menu="menu-verified" class='btn btn-highlight rounded-sm btn-m bg-green-dark text-uppercase font-700 mt-4 btn-center-xl'>Verify</a>
+                        <p class="pt-2 font-11 text-center mb-0">Didn't receive your code? <a href="#">Resend OTP</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End of Page Content-->
+        <!-- All Menus, Action Sheets, Modals, Notifications, Toasts, Snackbars get Placed outside the <div class="page-content"> -->
+
+        <div id="menu-verified" class="menu menu-box-modal menu-box-detached">
+            <div class="content text-center py-4">
+                <i class="fa fa-check-circle color-green-dark fa-6x scale-box"></i>
+                <h1 class="pt-4 mb-0">Identity Verified</h1>
+                <p>
+                    Thank you for verifying your identity!
+                </p>
+                <a href="#" class="close-menu btn btn-center-l btn-m bg-green-dark rounded-sm text-uppercase font-700 mb-3">Awesome</a>
+            </div>
+        </div>
+    </div>
+
+    {{template "script" .}}
+</body>
+</html>

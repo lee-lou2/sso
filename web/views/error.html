@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+
+<body class="theme-light" data-highlight="highlight-red" data-gradient="body-default">
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+        <div class="card-top">
+            <div class="d-flex">
+                <a href="#" data-back-button class="me-auto icon icon-m"><i class="font-14 fa fa-arrow-left color-theme"></i></a>
+                <a href="#" data-toggle-theme class="show-on-theme-light ms-auto icon icon-m"><i class="font-12 fa fa-moon color-theme"></i></a>
+                <a href="#" data-toggle-theme class="show-on-theme-dark ms-auto icon icon-m"><i class="font-12 fa fa-lightbulb color-yellow-dark"></i></a>
+            </div>
+        </div>
+
+        <div class="page-content pb-0">
+
+            <div data-card-height="cover" class="card">
+                <div class="card-top notch-clear">
+                    <div class="d-flex">
+                        <a href="#" data-back-button class="me-auto icon icon-m"><i class="font-14 fa fa-arrow-left color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-light ms-auto icon icon-m"><i class="font-12 fa fa-moon color-theme"></i></a>
+                        <a href="#" data-toggle-theme class="show-on-theme-dark ms-auto icon icon-m"><i class="font-12 fa fa-lightbulb color-yellow-dark"></i></a>
+                    </div>
+                </div>
+                <div class="card-center text-center main-card-box">
+                    <div class="main-card">
+                        <h1 class="center-text mb-5"><i class="fa fa-3x fa-exclamation-triangle color-red-dark "></i></h1>
+                        <h1 class="center-text fa-5x mb-3">ERROR</h1>
+                        <h6 class="center-text font-800 font-14 mb-4">{{.error_code}}</h6>
+
+                        <p class="boxed-text-l mb-5 opacity-80">
+                            {{.message}}
+                        </p>
+                        <div class="row me-5 ms-5 mb-0">
+                            <div class="col-6">
+                                <a href="/" class="back-button ms-2 btn btn-m bg-highlight rounded-sm btn-full text-uppercase font-900 shadow-l">HOME</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="back-button me-2 btn btn-m bg-highlight rounded-sm btn-full text-uppercase font-900 shadow-l">CONTACT</a>
+                            </div>
+                            <div class="claerfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "script" .}}
+</body>
+</html>

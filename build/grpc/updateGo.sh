@@ -1,0 +1,1 @@
+docker run --rm -v $(PWD):/app -w /app -it grpc-proto-builder protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative sso.proto
