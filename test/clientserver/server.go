@@ -5,7 +5,7 @@ import (
 	"sso/config/env"
 )
 
-const ServerHost = "http://localhost:3000"
+const ServerHost = "https://sso.lou2.kr"
 
 func main() {
 	// 환경 설정
